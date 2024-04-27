@@ -1,0 +1,29 @@
+.contactBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.name {
+  font-weight: 700;
+  color: #646cff;
+}
+.button{
+    background-color: #646cff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.number{
+    color: #252bad;
+    font-style: italic;
+}
+.icon{
+ text-align: center; 
+ font-size: 30px;
+ margin-right: 10px;
+ height: 30px;
+ 
+}
