@@ -7,8 +7,7 @@ import { selectIsError, selectIsLoading, selectIsRefreshing } from '../../redux/
 import Loader from '/src/components/Loader/Loader';
 const RegistrationForm = () => {
   const dispatch = useDispatch();
-  const isErrorMessage = useSelector(selectIsError);
-  const isRefresh = useSelector(selectIsRefreshing);
+
   const isLoading = useSelector(selectIsLoading);
   const initialRegisterValues = {
     name: '',
@@ -54,11 +53,7 @@ const RegistrationForm = () => {
         </Form>
       </Formik>
       <div className={css.message}>{isLoading && <Loader />}</div>
-      <div className={css.message}>
-        {!isRefresh && isErrorMessage && (
-          <p> Somethin went wrong... You are already registered or try again late! </p>
-        )}
-      </div>
+      <div className={css.message}></div>
     </div>
   );
 };
