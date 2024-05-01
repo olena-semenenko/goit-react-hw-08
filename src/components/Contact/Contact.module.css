@@ -8,22 +8,33 @@
   font-weight: 700;
   color: #646cff;
 }
-.button{
-    background-color: #646cff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+.btn {
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 120px;
 }
-.number{
-    color: #252bad;
-    font-style: italic;
+.btn :hover {
+  background-color: #f44336;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
-.icon{
- text-align: center; 
- font-size: 30px;
- margin-right: 10px;
- height: 30px;
- 
+.number {
+  color: #252bad;
+  font-style: italic;
+}
+.icon {
+  text-align: center;
+  font-size: 30px;
+  margin-right: 10px;
+  height: 30px;
+}
+.list_btn {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-direction: column;
 }

@@ -1,11 +1,11 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { addContact, deleteContact, fetchContacts } from './contactsOps';
-import { selectNameFilter } from './filtersSlice';
+import { createSlice } from '@reduxjs/toolkit';
+import { addContact, deleteContact, editContact, fetchContacts } from './operations';
 
 const INITIAL_STATE = {
-  items: [],
+  items: null,
   loading: false,
   error: null,
+  currentContact: null,
 };
 const thunkPending = state => {
   state.loading = true;
@@ -17,6 +17,12 @@ const thunkRejected = (state, action) => {
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: INITIAL_STATE,
+  reducers: {
+    setCurrentContact(state, action) {
+      state.currentContact = action.payload;
+    },
+  },
+
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, thunkPending)
@@ -39,27 +45,19 @@ const contactsSlice = createSlice({
         state.error = null;
         state.items = state.items.filter(item => item.id !== action.payload.id);
       })
-      .addCase(deleteContact.rejected, thunkRejected);
+      .addCase(deleteContact.rejected, thunkRejected)
+      .addCase(editContact.pending, thunkPending)
+      .addCase(editContact.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.items = state.items.map(item =>
+          item.name !== action.payload.name ? action.payload : item
+        );
+      })
+      .addCase(editContact.rejected, thunkRejected);
   },
 });
 
 //export reducer
 export const contactsReducer = contactsSlice.reducer;
-
-//export state selector
-export const selectContacts = state => state.contacts.items;
-export const selectLoading = state => state.contacts.loading;
-export const selectError = state => state.contacts.error;
-
-// filtered contacts
-const selectFilter = state => state.filters.name;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectFilter],
-  (items, name) => {
-    const filteredContacts = items.filter(contact =>
-      contact.name.toLowerCase().includes(name.toLowerCase())
-    );
-    return filteredContacts;
-  }
-);
+export const { setCurrentContact } = contactsSlice.actions;

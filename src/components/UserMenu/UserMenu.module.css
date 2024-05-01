@@ -1,17 +1,17 @@
-.form {
+.user_info {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 400px;
-  padding: 10px;
-  border: 4px solid black;
+  align-items: center;
+
+  gap: 25px;
 }
-.form_input {
-  display: flex;
-  flex-direction: column;
+
+.user_name {
+  margin-right: 10px;
+  font-size: 20px;
   color: white;
 }
-.form_btn {
+
+.logout_btn {
   background-color: #ff5722;
   color: white;
   border: none;
@@ -20,11 +20,8 @@
   cursor: pointer;
   font-size: 16px;
 }
-.form_btn :hover {
+
+.logout_btn :hover {
   background-color: #f44336;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.close_btn {
-  display: flex;
-  justify-content: flex-end;
 }

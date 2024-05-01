@@ -1,0 +1,44 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+.text {
+  font-size: 24px;
+  font-weight: 700;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+.btn_list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.btn {
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+.confirm {
+  background-color: green;
+}
+.confirm:hover {
+  background-color: rgb(2, 96, 2);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.regect {
+  background-color: red;
+}
+.regect:hover {
+  background-color: rgb(196, 3, 3);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}

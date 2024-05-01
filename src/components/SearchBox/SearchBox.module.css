@@ -10,6 +10,15 @@
   font-size: 20px;
   border-color: #646cff;
 }
-.searchBox{
-  margin: 20px 0 ;
+.searchBox {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.subtitle {
+  color: white;
+  font-size: 24px;
+  padding: 10px 20px;
 }

@@ -1,14 +1,24 @@
 import { useDispatch } from 'react-redux';
 import css from './Contact.module.css';
 import { ImUser, ImMobile } from 'react-icons/im';
-import { deleteContact } from '../../redux/contactsOps';
+import { setCurrentContact } from '../../redux/contacts/slice';
 
-const Contact = ({ name, phone, id }) => {
+const Contact = ({ name, phone, id, openModalDelete, openModalEdit }) => {
   const dispatch = useDispatch();
-
+  const currentContact = {
+    id,
+    name,
+    phone,
+  };
   const handleBtnDelete = () => {
-    const contactId = id;
-    dispatch(deleteContact(contactId));
+    dispatch(setCurrentContact(currentContact));
+
+    openModalDelete();
+  };
+  const handleBtnEdit = () => {
+    dispatch(setCurrentContact(currentContact));
+
+    openModalEdit();
   };
   return (
     <div className={css.contactBox}>
@@ -21,10 +31,18 @@ const Contact = ({ name, phone, id }) => {
           <ImMobile className={css.icon} /> {phone}
         </p>
       </span>
-
-      <button className={css.button} type="button" onClick={handleBtnDelete}>
-        Delete
-      </button>
+      <ul className={css.list_btn}>
+        <li>
+          <button className={css.btn} type="button" onClick={handleBtnEdit}>
+            Edit name
+          </button>
+        </li>
+        <li>
+          <button className={css.btn} type="button" onClick={handleBtnDelete}>
+            Delete
+          </button>
+        </li>
+      </ul>
     </div>
   );
 };

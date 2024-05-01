@@ -1,0 +1,14 @@
+.nav_menu {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  margin-right: 20px;
+}
+
+.active {
+  text-decoration: underline;
+}
