@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { login, logout, refreshUser, register } from './operations';
 
 const INITIAL_STATE = {
@@ -12,19 +12,12 @@ const INITIAL_STATE = {
   isLoading: false,
   isError: false,
 };
-const thunkPending = state => {
-  state.isLoading = true;
-};
-const thunkRejected = (state, action) => {
-  state.isLoading = false;
-  state.isError = action.payload;
-};
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(register.pending, thunkPending)
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
@@ -33,27 +26,20 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
       })
-      .addCase(register.rejected, thunkRejected)
       // login
-      .addCase(login.pending, thunkPending)
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isRefreshing = true;
         state.isLoggedIn = true;
-        // state.isRefreshing = true;
         state.isLoading = false;
         state.isError = false;
       })
-      .addCase(login.rejected, thunkRejected)
       // logout
-      .addCase(logout.pending, thunkPending)
       .addCase(logout.fulfilled, () => {
         return INITIAL_STATE;
       })
-      .addCase(logout.rejected, thunkRejected)
       // refresh
-      .addCase(refreshUser.pending, thunkPending)
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user.name = action.payload.name;
         state.user.email = action.payload.email;
@@ -62,7 +48,23 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
       })
-      .addCase(refreshUser.rejected, thunkRejected);
+
+      // all pendings
+      .addMatcher(
+        isAnyOf(register.pending, login.pending, logout.pending, refreshUser.pending),
+        state => {
+          state.isLoading = true;
+          state.isError = false;
+        }
+      )
+      // all rejected
+      .addMatcher(
+        isAnyOf(register.rejected, login.rejected, logout.rejected, refreshUser.rejected),
+        (state, action) => {
+          state.isLoading = false;
+          state.isError = action.payload;
+        }
+      );
   },
 });
 
