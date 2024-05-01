@@ -51,7 +51,7 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.items = state.items.map(item =>
-          item.name !== action.payload.name ? action.payload : item
+          item.id === action.payload.id ? action.payload : item
         );
       })
       .addCase(editContact.rejected, thunkRejected);

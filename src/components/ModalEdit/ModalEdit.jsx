@@ -41,10 +41,7 @@ const ModalEdit = ({ isOpen, onRequestClose, onOpenButton }) => {
     e.preventDefault();
 
     dispatch(
-      editContact(currentContact.id, {
-        name: inputValue,
-        number: currentContact.phone,
-      })
+      editContact({ id: currentContact.id, name: inputValue, number: currentContact.phone })
     );
     setInputValue('');
     onRequestClose();
@@ -66,13 +63,14 @@ const ModalEdit = ({ isOpen, onRequestClose, onOpenButton }) => {
       >
         <div>
           <form className={css.form} onSubmit={onEditFormSubmit}>
-            <label className={css.form_input}>
-              <span>Enter new value</span>
+            <label className={css.form_label}>
+              <span>Enter new value:</span>
               <input
                 type="text"
                 placeholder="Enter edited name"
                 value={inputValue}
                 onChange={handleChange}
+                className={css.form_input}
                 required
               />
             </label>

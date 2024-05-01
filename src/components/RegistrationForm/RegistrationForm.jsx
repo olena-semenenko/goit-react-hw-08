@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import css from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/auth/operations';
-import { selectIsError, selectIsLoading, selectIsRefreshing } from '../../redux/auth/selectors';
+import { selectIsLoading } from '../../redux/auth/selectors';
 import Loader from '/src/components/Loader/Loader';
 const RegistrationForm = () => {
   const dispatch = useDispatch();
