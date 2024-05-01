@@ -3,11 +3,12 @@ import * as Yup from 'yup';
 import css from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/auth/operations';
-import { selectIsError, selectIsLoading } from '../../redux/auth/selectors';
+import { selectIsError, selectIsLoading, selectIsRefreshing } from '../../redux/auth/selectors';
 import Loader from '/src/components/Loader/Loader';
 const RegistrationForm = () => {
   const dispatch = useDispatch();
   const isErrorMessage = useSelector(selectIsError);
+  const isRefresh = useSelector(selectIsRefreshing);
   const isLoading = useSelector(selectIsLoading);
   const initialRegisterValues = {
     name: '',
@@ -54,7 +55,7 @@ const RegistrationForm = () => {
       </Formik>
       <div className={css.message}>{isLoading && <Loader />}</div>
       <div className={css.message}>
-        {isErrorMessage && (
+        {!isRefresh && isErrorMessage && (
           <p> Somethin went wrong... You are already registered or try again late! </p>
         )}
       </div>

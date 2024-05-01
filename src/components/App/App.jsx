@@ -18,6 +18,7 @@ const NotFoundPage = lazy(() => import('/src/pages/NotFoundPage/NotFoundPage.jsx
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
