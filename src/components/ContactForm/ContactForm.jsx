@@ -17,6 +17,7 @@ const ContactForm = ({ onSubmit }) => {
     const newContact = values;
     dispatch(addContact(newContact));
     onSubmit();
+    toast.success('New contact added');
 
     actions.resetForm();
   };
@@ -58,13 +59,7 @@ const ContactForm = ({ onSubmit }) => {
             <Field type="tel" name="number" placeholder="111-222-3333"></Field>
             <ErrorMessage name="number" component="span" />
           </label>
-          <button
-            className={css.form_btn}
-            type="submit"
-            onClick={() => {
-              toast.success('New contact added');
-            }}
-          >
+          <button className={css.form_btn} type="submit">
             Create new contact
           </button>
         </Form>
